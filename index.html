@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Patrimoine en clair</title>
+<link rel="icon" href="icon.png">
 </head>
 <body>
 <title>Patrimoine en clair</title>
@@ -26,9 +28,16 @@
 body{background:var(--app-bg);color:var(--app-ink);font-family:var(--app-font);margin:0}
 #app-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--app-bg);border-bottom:1px solid var(--app-line)}
 #app-bar .in{max-width:1180px;margin:0 auto;padding-inline:16px;display:flex;align-items:center;gap:20px;min-height:var(--app-bar-h)}
+#app-bar .top{display:contents}
 #app-bar .brand{flex:none;display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.01em;color:var(--app-ink);text-decoration:none}
 #app-bar .brand i{width:11px;height:11px;border-radius:50%;background:var(--app-signal);display:block}
 #app-bar .brand span{font-weight:500;color:var(--app-ink-soft)}
+#app-auth{display:flex;align-items:center;gap:10px;order:2;flex:none}
+#app-auth-who{font-size:13px;color:var(--app-ink-soft);max-width:22ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app-auth-btn{font:inherit;font-size:13px;font-weight:700;color:var(--app-bg);background:var(--app-signal);border:0;border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+#app-auth-btn.out{background:transparent;color:var(--app-ink);border:1px solid var(--app-line)}
+#app-auth-btn:focus-visible{outline:2px solid var(--app-signal);outline-offset:2px}
+#app-auth-btn:disabled{opacity:.6;cursor:default}
 #app-bar nav{min-width:0;flex:1;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 #app-bar nav::-webkit-scrollbar{display:none}
 #app-bar nav a{flex:none;font-size:13.5px;font-weight:600;color:var(--app-ink-soft);text-decoration:none;padding:8px 12px;border-radius:999px;white-space:nowrap}
@@ -38,6 +47,10 @@ body{background:var(--app-bg);color:var(--app-ink);font-family:var(--app-font);m
 @media (max-width:820px){
   #app-bar .in{flex-direction:column;align-items:stretch;gap:2px;padding-block:8px 6px}
   #app-bar nav{flex:none;margin-inline:-6px}
+  #app-bar .top{display:flex;align-items:center;justify-content:space-between;gap:6px 12px;flex-wrap:wrap;min-width:0}
+  #app-bar .brand{font-size:15px}
+  #app-auth-btn{padding:7px 12px}
+  #app-auth-who{display:none}
   :root{--app-bar-h:92px}
 }
 .app-view{min-height:60vh}
@@ -51,7 +64,13 @@ body{background:var(--app-bg);color:var(--app-ink);font-family:var(--app-font);m
 
 <header id="app-bar">
   <div class="in">
-    <a class="brand" href="#m-hub"><i aria-hidden="true"></i>eToro Patrimoine <span>Patrimoine en clair</span></a>
+    <div class="top">
+      <a class="brand" href="#m-hub"><i aria-hidden="true"></i>eToro Patrimoine <span>Patrimoine en clair</span></a>
+      <div id="app-auth" hidden>
+        <span id="app-auth-who" hidden></span>
+        <button type="button" id="app-auth-btn">Se connecter avec eToro</button>
+      </div>
+    </div>
     <nav aria-label="Rubriques">
       <a href="#m-hub" data-nav="hub">Accueil</a>
       <a href="#m-profil" data-nav="profil">Profil d’investisseur</a>
@@ -4040,10 +4059,72 @@ fillKyc();fillReleve([]);fillParams();statusDefault();resetEnvoi();render();
   show('hub',false); route(false);
 })();
 
-/* Connexion eToro (SSO) : non branchée.
-   À la mise en service : redirection vers https://www.etoro.com/sso puis échange du code côté serveur
-   (POST https://www.etoro.com/api/sso/v1/token). Paramètres exacts à reprendre du portail API eToro. */
-window.etpAuth={connected:false};
+/* Connexion eToro (OAuth 2.0 + PKCE S256).
+   La page ne détient aucun secret : l'échange du code se fait sur le serveur ETP_AUTH.serveur,
+   qui ne renvoie que le jeton d'identité. Le bouton n'apparaît qu'à l'adresse enregistrée chez eToro. */
+(function(){
+  var ETP_AUTH={
+    clientId:'06e02c94-1d00-4994-8715-07baec436e6d',
+    retour:'https://juliennebenzahl-create.github.io/patrimoine-en-clair/',
+    serveur:'https://patrimoine-en-clair-auth.juliennebenzahl.workers.dev',
+    autoriser:'https://www.etoro.com/sso',
+    scope:'openid profile'
+  };
+  window.etpAuth={connected:false,user:null};
+  var box=document.getElementById('app-auth'), btn=document.getElementById('app-auth-btn'), who=document.getElementById('app-auth-who');
+  if(location.origin+location.pathname!==ETP_AUTH.retour) return;   /* hors adresse enregistrée : pas de connexion */
+  var store={get:function(k){try{return sessionStorage.getItem(k);}catch(e){return null;}},
+             set:function(k,v){try{sessionStorage.setItem(k,v);}catch(e){}},
+             del:function(k){try{sessionStorage.removeItem(k);}catch(e){}}};
+  function b64url(buf){var s='',b=new Uint8Array(buf);for(var i=0;i<b.length;i++)s+=String.fromCharCode(b[i]);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+  function rand(n){var a=new Uint8Array(n);crypto.getRandomValues(a);return b64url(a.buffer);}
+  function claims(jwt){try{var p=jwt.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');while(p.length%4)p+='=';
+    return JSON.parse(decodeURIComponent(Array.prototype.map.call(atob(p),function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join('')));}catch(e){return null;}}
+  function paint(){
+    var u=null; try{u=JSON.parse(store.get('etp_user')||'null');}catch(e){}
+    if(u && u.exp && u.exp*1000<Date.now()){u=null;store.del('etp_user');}
+    window.etpAuth={connected:!!u,user:u};
+    box.hidden=false;
+    if(u){who.hidden=false;who.textContent=u.name?('Connecté : '+u.name):'Connecté';btn.textContent='Se déconnecter';btn.className='out';}
+    else{who.hidden=true;who.textContent='';btn.textContent='Se connecter avec eToro';btn.className='';}
+  }
+  function login(){
+    if(!(window.crypto&&crypto.subtle)){window.etpNotice('Connexion indisponible dans ce navigateur.');return;}
+    var verifier=rand(48), state=rand(24), nonce=rand(24);
+    store.set('etp_pkce',JSON.stringify({v:verifier,s:state,n:nonce}));
+    btn.disabled=true;
+    crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier)).then(function(h){
+      var q='response_type=code&client_id='+encodeURIComponent(ETP_AUTH.clientId)+'&redirect_uri='+encodeURIComponent(ETP_AUTH.retour)
+        +'&scope='+encodeURIComponent(ETP_AUTH.scope)+'&state='+state+'&nonce='+nonce+'&code_challenge='+b64url(h)+'&code_challenge_method=S256';
+      location.assign(ETP_AUTH.autoriser+'?'+q);
+    }).catch(function(){btn.disabled=false;window.etpNotice('La connexion n’a pas pu être préparée.');});
+  }
+  function finish(){
+    var q=new URLSearchParams(location.search), code=q.get('code'), err=q.get('error');
+    if(!code && !err) return;
+    var saved=null; try{saved=JSON.parse(store.get('etp_pkce')||'null');}catch(e){}
+    store.del('etp_pkce');
+    try{history.replaceState(null,'',ETP_AUTH.retour);}catch(e){}
+    if(err){window.etpNotice('Connexion eToro refusée ou annulée ('+err+').');return;}
+    if(!saved || q.get('state')!==saved.s){window.etpNotice('Connexion interrompue : la demande ne correspond pas à cette session. Recommencez.');return;}
+    btn.disabled=true;btn.textContent='Connexion en cours';
+    fetch(ETP_AUTH.serveur+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:code,code_verifier:saved.v})})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(x){
+        if(!x.ok || !x.j.id_token) throw new Error((x.j&&x.j.error||'erreur')+(x.j&&x.j.status?' '+x.j.status:''));
+        var c=claims(x.j.id_token);
+        var aud=c&&c.aud, audOk=aud===ETP_AUTH.clientId||(Array.isArray(aud)&&aud.indexOf(ETP_AUTH.clientId)>-1);
+        if(!c || !c.sub || c.iss!=='https://www.etoro.com' || !audOk || c.nonce!==saved.n || !(c.exp*1000>Date.now())) throw new Error('jeton invalide');
+        var name=c.name||[c.given_name,c.family_name].filter(Boolean).join(' ')||c.preferred_username||c.username||'';
+        store.set('etp_user',JSON.stringify({sub:c.sub,name:name,exp:c.exp}));
+        window.etpNotice('Connexion eToro établie.');
+      })
+      .catch(function(e){window.etpNotice('La connexion eToro a échoué ('+(e&&e.message||'erreur')+').');})
+      .then(function(){btn.disabled=false;paint();});
+  }
+  btn.addEventListener('click',function(){ if(window.etpAuth.connected){store.del('etp_user');paint();} else login(); });
+  paint(); finish();
+})();
 </script>
 
 </body>
