@@ -9,11 +9,11 @@
 <body>
 <title>Patrimoine en clair</title>
 <!--
-  eToro Patrimoine · application « Patrimoine en clair » (hub + 5 modules dans une seule page)
+  etoro Patrimoine · application « Patrimoine en clair » (hub + 5 modules dans une seule page)
   Assemblée le 3 octobre 2026 à partir de l'espace Simuler du 2 octobre 2026.
   - Navigation par ancre : #m-profil, #m-patrimoine, #m-compare, #m-rente, #m-retraite.
   - Tous les calculs restent dans le navigateur. Aucun appel serveur.
-  - Connexion eToro (SSO) non incluse : voir la fonction etpAuth en fin de fichier.
+  - Connexion etoro (SSO) non incluse : voir la fonction etpAuth en fin de fichier.
 -->
 <style>
 /* Mise en page : barre d'application fixe en haut, une vue affichée à la fois dessous. */
@@ -57,6 +57,9 @@ body{background:var(--app-bg);color:var(--app-ink);font-family:var(--app-font);m
 /* ancres internes du diagnostic : dégagées de la barre d'application */
 #etp-diag [id]{scroll-margin-top:calc(var(--app-bar-h) + 16px)}
 @media (min-width:1240px){#etp-diag .rail{top:calc(var(--app-bar-h) + 24px)}}
+#etp-hub .foot .cta{margin-right:10px}
+#etp-hub .foot .cta[data-epargne]{margin-right:0;background:transparent;color:var(--app-ink);border:1.5px solid var(--app-line)}
+#etp-hub .foot .cta[data-epargne]:hover{background:var(--app-signal);color:var(--app-bg);border-color:var(--app-signal)}
 #app-toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;
   max-width:min(560px,calc(100% - 32px));background:var(--app-ink);color:var(--app-bg);font-size:14px;font-weight:600;line-height:1.45;
   padding:12px 18px;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
@@ -65,10 +68,10 @@ body{background:var(--app-bg);color:var(--app-ink);font-family:var(--app-font);m
 <header id="app-bar">
   <div class="in">
     <div class="top">
-      <a class="brand" href="#m-hub"><i aria-hidden="true"></i>eToro Patrimoine <span>Patrimoine en clair</span></a>
+      <a class="brand" href="#m-hub"><i aria-hidden="true"></i>etoro Patrimoine <span>Patrimoine en clair</span></a>
       <div id="app-auth" hidden>
         <span id="app-auth-who" hidden></span>
-        <button type="button" id="app-auth-btn">Se connecter avec eToro</button>
+        <button type="button" id="app-auth-btn">Se connecter avec etoro</button>
       </div>
     </div>
     <nav aria-label="Rubriques">
@@ -234,7 +237,7 @@ body{margin:0}
       <span>
         <span class="tag">Clients</span>
         <h3>Espace client</h3>
-        <p>Vous êtes client eToro Patrimoine : suivez vos versements, vos supports et vos documents.</p>
+        <p>Vous êtes client etoro Patrimoine : suivez vos versements, vos supports et vos documents.</p>
         <span class="go">Accéder à mon espace →</span>
       </span>
     </a>
@@ -244,15 +247,16 @@ body{margin:0}
     <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6DFF8A" stroke-width="2" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg></span>
     <div>
       <h4>Aucune donnée conservée.</h4>
-      <p>Les informations saisies dans les outils de cet espace sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à eToro Patrimoine, ni conservées par eToro Patrimoine, et disparaissent à la fermeture de la page.</p>
+      <p>Les informations saisies dans les outils de cet espace sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à etoro Patrimoine, ni conservées par etoro Patrimoine, et disparaissent à la fermeture de la page.</p>
       <p>Seules les informations que vous renseigneriez dans le parcours de souscription d’un contrat seraient conservées, dans les conditions prévues par la réglementation sur la protection des données (RGPD).</p>
     </div>
   </div>
 
   <footer class="foot">
-    <p style="color:rgba(236,234,209,.72);font-size:15px;max-width:62ch">Un résultat vous interpelle, une question reste ouverte — un conseiller eToro Patrimoine reprend vos chiffres avec vous, en visio ou par téléphone.</p>
+    <p style="color:rgba(236,234,209,.72);font-size:15px;max-width:62ch">Un résultat vous interpelle, une question reste ouverte — un conseiller etoro Patrimoine reprend vos chiffres avec vous, en visio ou par téléphone.</p>
     <a class="cta" href="https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine" target="_blank" rel="noopener">Prendre rendez-vous</a>
-    <p class="legal">Outils de simulation à caractère indicatif et non contractuel. Ils ne constituent ni un conseil en investissement, ni une recommandation personnalisée, ni une offre de souscription — le conseil est délivré dans le parcours de souscription ou en rendez-vous. eToro Patrimoine SAS, intermédiaire en assurance immatriculé à l’ORIAS sous le n° 11064583 · 19 boulevard Malesherbes, 75008 Paris.</p>
+<a class="cta" href="https://www.etoro.com/home?action=wealthfrance_trigger_flow" target="_blank" rel="noopener" data-epargne>Découvrir l’épargne etoro</a>
+    <p class="legal">Outils de simulation à caractère indicatif et non contractuel. Ils ne constituent ni un conseil en investissement, ni une recommandation personnalisée, ni une offre de souscription — le conseil est délivré dans le parcours de souscription ou en rendez-vous. etoro Patrimoine SAS, intermédiaire en assurance immatriculé à l’ORIAS sous le n° 11064583 · 19 boulevard Malesherbes, 75008 Paris.</p>
   </footer>
 </div>
 </div>
@@ -505,6 +509,7 @@ body{margin:0}
       <div class="r-cta">
         <button class="a1" type="button" id="pf-pdf">Télécharger mes résultats</button>
         <a class="a2" href="https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine" target="_blank" rel="noopener">Prendre rendez-vous</a>
+<a class="a2" href="https://www.etoro.com/home?action=wealthfrance_trigger_flow" target="_blank" rel="noopener" data-epargne>Découvrir l’épargne etoro</a>
       </div>
     </aside>
   </div>
@@ -513,12 +518,12 @@ body{margin:0}
     <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6DFF8A" stroke-width="2" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg></span>
     <div>
       <h4>Aucune donnée conservée.</h4>
-      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à eToro Patrimoine, ni conservées par eToro Patrimoine, et disparaissent à la fermeture de la page.</p>
+      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à etoro Patrimoine, ni conservées par etoro Patrimoine, et disparaissent à la fermeture de la page.</p>
       <p>Seules les informations que vous renseigneriez dans le parcours de souscription d'un contrat seraient conservées, dans les conditions prévues par la réglementation sur la protection des données (RGPD).</p>
     </div>
   </div>
   <div class="legal">
-    <p>Estimation indicative calculée selon la mécanique du questionnaire réglementaire de notre partenaire. Le profil retenu sera celui établi lors d'une éventuelle souscription, au terme du parcours de conseil. eToro Patrimoine SAS · CIF · ORIAS 11064583.</p>
+    <p>Estimation indicative calculée selon la mécanique du questionnaire réglementaire de notre partenaire. Le profil retenu sera celui établi lors d'une éventuelle souscription, au terme du parcours de conseil. etoro Patrimoine SAS · CIF · ORIAS 11064583.</p>
   </div>
   </div>
 </div>
@@ -769,7 +774,7 @@ function pdfWrite(title, rows, legal, fname, rubrique){
     var today = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
     var header = function(){
       fill(COL.after); doc.rect(0, 0, W, 26, 'F');
-      doc.setFont('helvetica','bold'); doc.setFontSize(13); ink(COL.prod); tx('eToro Patrimoine', X, 12);
+      doc.setFont('helvetica','bold'); doc.setFontSize(13); ink(COL.prod); tx('etoro Patrimoine', X, 12);
       doc.setFont('helvetica','normal'); doc.setFontSize(8); ink(COL.intel);
       tx('Simuler · '+(rubrique||'Synthèse')+'  ·  '+today, X, 18);
       tx('Établi dans votre navigateur — aucune donnée conservée', X+CW, 18, {align:'right'});
@@ -781,7 +786,7 @@ function pdfWrite(title, rows, legal, fname, rubrique){
       doc.setDrawColor(205,203,180); doc.setLineWidth(0.2); doc.line(X, ly-3.5, X+CW, ly-3.5);
       doc.setFont('helvetica','normal'); doc.setFontSize(6.8); ink(COL.soft); doc.text(legalLines, X, ly);
       doc.setFont('helvetica','bold'); doc.setFontSize(8); ink(COL.after);
-      tx('eToro Patrimoine · 01 89 70 56 40 · contact@etoropatrimoine.fr · Rendez-vous : calendly.com/d/crzd-vrc-thq', X, H-8);
+      tx('etoro Patrimoine · 01 89 70 56 40 · contact@etoropatrimoine.fr · Rendez-vous : calendly.com/d/crzd-vrc-thq', X, H-8);
     };
     var BOTTOM = 262;
     var ensure = function(need){ if(y+need > BOTTOM){ doc.addPage(); header(); footer(); y = 38; } };
@@ -843,7 +848,7 @@ $('pf-pdf').onclick = function(){
   if(r.failed) rows.push(['p','Certaines réponses de vérification ne correspondent pas aux produits déclarés : l’expérience déclarée n’a pas été retenue dans le calcul.']);
   rows.push(['p','Estimation indicative : le profil retenu sera celui établi par l’assureur lors d’une éventuelle souscription, au terme du parcours de conseil. Une analyse patrimoniale peut ajuster ce profil d’un niveau à la baisse.']);
   pdfWrite('Votre profil d’investisseur.', rows,
-    'Estimation indicative calculée selon la mécanique du questionnaire réglementaire de notre partenaire. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. eToro Patrimoine SAS, CIF, ORIAS 11064583 — etoropatrimoine.fr',
+    'Estimation indicative calculée selon la mécanique du questionnaire réglementaire de notre partenaire. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. etoro Patrimoine SAS, CIF, ORIAS 11064583 — etoropatrimoine.fr',
     'profil-investisseur-etoro-patrimoine', 'Profil d’investisseur');
 };
 
@@ -1090,6 +1095,7 @@ body{margin:0}
       <div class="r-cta">
         <button class="a1" type="button" id="pa-pdf">Télécharger mes résultats</button>
         <a class="a2" href="https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine" target="_blank" rel="noopener">Prendre rendez-vous</a>
+<a class="a2" href="https://www.etoro.com/home?action=wealthfrance_trigger_flow" target="_blank" rel="noopener" data-epargne>Découvrir l’épargne etoro</a>
       </div>
     </aside>
   </div>
@@ -1112,12 +1118,12 @@ body{margin:0}
     <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6DFF8A" stroke-width="2" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg></span>
     <div>
       <h4>Aucune donnée conservée.</h4>
-      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à eToro Patrimoine, ni conservées par eToro Patrimoine, et disparaissent à la fermeture de la page.</p>
+      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à etoro Patrimoine, ni conservées par etoro Patrimoine, et disparaissent à la fermeture de la page.</p>
       <p>Seules les informations que vous renseigneriez dans le parcours de souscription d'un contrat seraient conservées, dans les conditions prévues par la réglementation sur la protection des données (RGPD).</p>
     </div>
   </div>
   <div class="legal">
-    <p>Photographie indicative construite à partir de vos déclarations, sans vérification. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. eToro Patrimoine SAS · CIF · ORIAS 11064583.</p>
+    <p>Photographie indicative construite à partir de vos déclarations, sans vérification. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. etoro Patrimoine SAS · CIF · ORIAS 11064583.</p>
   </div>
   </div>
 </div>
@@ -1378,7 +1384,7 @@ function pdfWrite(title, rows, legal, fname, rubrique){
     var today = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
     var header = function(){
       fill(COL.after); doc.rect(0, 0, W, 26, 'F');
-      doc.setFont('helvetica','bold'); doc.setFontSize(13); ink(COL.prod); tx('eToro Patrimoine', X, 12);
+      doc.setFont('helvetica','bold'); doc.setFontSize(13); ink(COL.prod); tx('etoro Patrimoine', X, 12);
       doc.setFont('helvetica','normal'); doc.setFontSize(8); ink(COL.intel);
       tx('Simuler · '+(rubrique||'Synthèse')+'  ·  '+today, X, 18);
       tx('Établi dans votre navigateur — aucune donnée conservée', X+CW, 18, {align:'right'});
@@ -1390,7 +1396,7 @@ function pdfWrite(title, rows, legal, fname, rubrique){
       doc.setDrawColor(205,203,180); doc.setLineWidth(0.2); doc.line(X, ly-3.5, X+CW, ly-3.5);
       doc.setFont('helvetica','normal'); doc.setFontSize(6.8); ink(COL.soft); doc.text(legalLines, X, ly);
       doc.setFont('helvetica','bold'); doc.setFontSize(8); ink(COL.after);
-      tx('eToro Patrimoine · 01 89 70 56 40 · contact@etoropatrimoine.fr · Rendez-vous : calendly.com/d/crzd-vrc-thq', X, H-8);
+      tx('etoro Patrimoine · 01 89 70 56 40 · contact@etoropatrimoine.fr · Rendez-vous : calendly.com/d/crzd-vrc-thq', X, H-8);
     };
     var BOTTOM = 262;
     var ensure = function(need){ if(y+need > BOTTOM){ doc.addPage(); header(); footer(); y = 38; } };
@@ -1470,7 +1476,7 @@ $('pa-pdf').onclick = function(){
     rows.push(['p','Constat chiffré, pas une recommandation : l’usage de ces moyens dépend de vos projets et de votre profil d’investisseur.']);
   }
   pdfWrite('Votre analyse patrimoniale.', rows,
-    'Photographie indicative construite à partir de vos déclarations, sans vérification. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. eToro Patrimoine SAS, CIF, ORIAS 11064583 — etoropatrimoine.fr',
+    'Photographie indicative construite à partir de vos déclarations, sans vérification. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. etoro Patrimoine SAS, CIF, ORIAS 11064583 — etoropatrimoine.fr',
     'analyse-patrimoniale-etoro-patrimoine', 'Analyse patrimoniale');
 };
 
@@ -1697,6 +1703,7 @@ body{margin:0}
       <div class="r-cta">
         <button class="a1" type="button" id="tj-pdf">Télécharger mes résultats</button>
         <a class="a2" href="https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine" target="_blank" rel="noopener">Prendre rendez-vous</a>
+<a class="a2" href="https://www.etoro.com/home?action=wealthfrance_trigger_flow" target="_blank" rel="noopener" data-epargne>Découvrir l’épargne etoro</a>
       </div>
     </aside>
   </div>
@@ -1748,12 +1755,12 @@ body{margin:0}
     <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6DFF8A" stroke-width="2" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg></span>
     <div>
       <h4>Aucune donnée conservée.</h4>
-      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à eToro Patrimoine, ni conservées par eToro Patrimoine, et disparaissent à la fermeture de la page.</p>
+      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à etoro Patrimoine, ni conservées par etoro Patrimoine, et disparaissent à la fermeture de la page.</p>
       <p>Seules les informations que vous renseigneriez dans le parcours de souscription d'un contrat seraient conservées, dans les conditions prévues par la réglementation sur la protection des données (RGPD).</p>
     </div>
   </div>
   <div class="legal">
-    <p>Les constats affichés décrivent une trajectoire type et ne constituent ni un conseil en investissement ni une recommandation personnalisée — le conseil est délivré dans le parcours de souscription. eToro Patrimoine SAS · CIF · ORIAS 11064583.</p>
+    <p>Les constats affichés décrivent une trajectoire type et ne constituent ni un conseil en investissement ni une recommandation personnalisée — le conseil est délivré dans le parcours de souscription. etoro Patrimoine SAS · CIF · ORIAS 11064583.</p>
   </div>
   </div>
 </div>
@@ -2148,7 +2155,7 @@ function pdfWrite(title, rows, legal, fname, rubrique){
     var today = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
     var header = function(){
       fill(COL.after); doc.rect(0, 0, W, 26, 'F');
-      doc.setFont('helvetica','bold'); doc.setFontSize(13); ink(COL.prod); tx('eToro Patrimoine', X, 12);
+      doc.setFont('helvetica','bold'); doc.setFontSize(13); ink(COL.prod); tx('etoro Patrimoine', X, 12);
       doc.setFont('helvetica','normal'); doc.setFontSize(8); ink(COL.intel);
       tx('Simuler · '+(rubrique||'Synthèse')+'  ·  '+today, X, 18);
       tx('Établi dans votre navigateur — aucune donnée conservée', X+CW, 18, {align:'right'});
@@ -2160,7 +2167,7 @@ function pdfWrite(title, rows, legal, fname, rubrique){
       doc.setDrawColor(205,203,180); doc.setLineWidth(0.2); doc.line(X, ly-3.5, X+CW, ly-3.5);
       doc.setFont('helvetica','normal'); doc.setFontSize(6.8); ink(COL.soft); doc.text(legalLines, X, ly);
       doc.setFont('helvetica','bold'); doc.setFontSize(8); ink(COL.after);
-      tx('eToro Patrimoine · 01 89 70 56 40 · contact@etoropatrimoine.fr · Rendez-vous : calendly.com/d/crzd-vrc-thq', X, H-8);
+      tx('etoro Patrimoine · 01 89 70 56 40 · contact@etoropatrimoine.fr · Rendez-vous : calendly.com/d/crzd-vrc-thq', X, H-8);
     };
     var BOTTOM = 262;
     var ensure = function(need){ if(y+need > BOTTOM){ doc.addPage(); header(); footer(); y = 38; } };
@@ -2242,7 +2249,7 @@ $('tj-pdf').onclick = function(){
     rows.push(['p','Ce n’est pas une recommandation personnalisée : la bonne répartition dépend de vos projets, de votre horizon et de votre profil d’investisseur, et la moyenne n’est pas une cible en soi. L’épargne de précaution (environ trois mois de revenus) passe avant tout investissement.']);
   }
   pdfWrite('Votre patrimoine, comparé.', rows,
-    'Poids estimés à partir des tranches indiquées ; moyenne des ménages français : ordre de grandeur établi d’après l’Insee (enquête Histoire de vie et Patrimoine 2021, détention 2024) et la Banque de France (encours 2024), livrets et dépôts exclus, part du compte-titres estimée. Ni conseil en investissement ni recommandation personnalisée. eToro Patrimoine SAS, CIF, ORIAS 11064583 — etoropatrimoine.fr',
+    'Poids estimés à partir des tranches indiquées ; moyenne des ménages français : ordre de grandeur établi d’après l’Insee (enquête Histoire de vie et Patrimoine 2021, détention 2024) et la Banque de France (encours 2024), livrets et dépôts exclus, part du compte-titres estimée. Ni conseil en investissement ni recommandation personnalisée. etoro Patrimoine SAS, CIF, ORIAS 11064583 — etoropatrimoine.fr',
     'patrimoine-compare-etoro-patrimoine', 'Patrimoine comparé');
 };
 
@@ -2556,6 +2563,7 @@ body { margin: 0; }
     <div class="cta">
       <button class="btn" type="button" id="sim-btn-pdf">Télécharger mes résultats</button>
       <a class="btn ghost" href="https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine" target="_blank" rel="noopener">Prendre rendez-vous</a>
+<a class="btn ghost" href="https://www.etoro.com/home?action=wealthfrance_trigger_flow" target="_blank" rel="noopener" data-epargne>Découvrir l’épargne etoro</a>
     </div>
   </aside>
 
@@ -2575,7 +2583,7 @@ body { margin: 0; }
   <div>
     <h2>Ce que la simulation ne prend pas en compte.</h2>
     <p class="soft">L'inflation. La fiscalité à l'entrée (déductibilité des versements sur un PER) et à la sortie. Les frais sur versements et les frais des supports, distincts des frais annuels du contrat. La variation des rendements d'une année à l'autre. Le rendement et les frais pendant la phase de versement de la rente. Une rente viagère, versée jusqu'au décès quel que soit l'âge, obéit à d'autres règles que celles présentées ici.</p>
-    <p class="soft">Ces éléments modifient le résultat, dans un sens ou dans l'autre. Un conseiller eToro Patrimoine les intègre dans une étude personnalisée.</p>
+    <p class="soft">Ces éléments modifient le résultat, dans un sens ou dans l'autre. Un conseiller etoro Patrimoine les intègre dans une étude personnalisée.</p>
   </div>
 </section>
 
@@ -2584,14 +2592,14 @@ body { margin: 0; }
     <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6DFF8A" stroke-width="2" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg></span>
     <div>
       <h4>Aucune donnée conservée.</h4>
-      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à eToro Patrimoine, ni conservées par eToro Patrimoine, et disparaissent à la fermeture de la page.</p>
+      <p>Les informations saisies sur cette page sont traitées uniquement dans votre navigateur. Elles ne sont ni transmises à etoro Patrimoine, ni conservées par etoro Patrimoine, et disparaissent à la fermeture de la page.</p>
       <p>Seules les informations que vous renseigneriez dans le parcours de souscription d'un contrat seraient conservées, dans les conditions prévues par la réglementation sur la protection des données (RGPD).</p>
     </div>
   </div>
 </div>
 
 <footer class="wrap legal">
-  <p>Simulation à caractère indicatif et non contractuel, réalisée à partir des hypothèses saisies par l'utilisateur. Elle ne constitue ni un conseil en investissement, ni une offre de souscription. Les rendements supposés ne préjugent pas des rendements futurs. L'investissement sur des supports en unités de compte comporte un risque de perte en capital. eToro Patrimoine SAS, intermédiaire en assurance immatriculé à l'ORIAS sous le n° 11064583.</p>
+  <p>Simulation à caractère indicatif et non contractuel, réalisée à partir des hypothèses saisies par l'utilisateur. Elle ne constitue ni un conseil en investissement, ni une offre de souscription. Les rendements supposés ne préjugent pas des rendements futurs. L'investissement sur des supports en unités de compte comporte un risque de perte en capital. etoro Patrimoine SAS, intermédiaire en assurance immatriculé à l'ORIAS sous le n° 11064583.</p>
 </footer>
 </div>
 <script>
@@ -2773,13 +2781,13 @@ body { margin: 0; }
     };
     var header = function (title, page) {
       fill(COL.after); doc.rect(0, 0, W, 26, "F");
-      doc.setFont("helvetica", "bold"); doc.setFontSize(13); ink(COL.prod); text("eToro Patrimoine", X, 12);
+      doc.setFont("helvetica", "bold"); doc.setFontSize(13); ink(COL.prod); text("etoro Patrimoine", X, 12);
       doc.setFont("helvetica", "normal"); doc.setFontSize(8); ink(COL.intel); text("Simulation retraite  ·  " + today, X, 18);
       ink(COL.intel); doc.setFontSize(8); text(title + "  ·  " + page + "/2", X + CW, 18, { align: "right" });
     };
     var footer = function () {
       doc.setFont("helvetica", "normal"); doc.setFontSize(6.8); ink(COL.soft);
-      var lines = doc.splitTextToSize(clean("Simulation à caractère indicatif et non contractuel, réalisée à partir des hypothèses saisies par l'utilisateur. Elle ne constitue ni un conseil en investissement, ni une offre de souscription. Les rendements supposés ne préjugent pas des rendements futurs. L'investissement sur des supports en unités de compte comporte un risque de perte en capital. eToro Patrimoine SAS, intermédiaire en assurance immatriculé à l'ORIAS sous le n° 11064583 — etoropatrimoine.fr"), CW);
+      var lines = doc.splitTextToSize(clean("Simulation à caractère indicatif et non contractuel, réalisée à partir des hypothèses saisies par l'utilisateur. Elle ne constitue ni un conseil en investissement, ni une offre de souscription. Les rendements supposés ne préjugent pas des rendements futurs. L'investissement sur des supports en unités de compte comporte un risque de perte en capital. etoro Patrimoine SAS, intermédiaire en assurance immatriculé à l'ORIAS sous le n° 11064583 — etoropatrimoine.fr"), CW);
       doc.text(lines, X, 297 - 8 - (lines.length - 1) * 3);
     };
 
@@ -3153,7 +3161,7 @@ details.method ul{margin:12px 0 0;padding-left:18px;display:flex;flex-direction:
       <svg class="privacy-ico" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="4" y="10" width="16" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="15.5" r="1.6" fill="currentColor"/></svg>
       <div>
         <h2 class="privacy-title">Aucune donnée conservée.</h2>
-        <p>Les informations saisies et le relevé de carrière déposé sur cette page sont traités uniquement dans votre navigateur. Ils ne sont ni transmis à eToro Patrimoine, ni conservés par eToro Patrimoine, et disparaissent à la fermeture de la page.</p>
+        <p>Les informations saisies et le relevé de carrière déposé sur cette page sont traités uniquement dans votre navigateur. Ils ne sont ni transmis à etoro Patrimoine, ni conservés par etoro Patrimoine, et disparaissent à la fermeture de la page.</p>
         <p>Seules les informations que vous renseigneriez dans le parcours de souscription d'un contrat seraient conservées, dans les conditions prévues par la réglementation sur la protection des données (RGPD).</p>
       </div>
     </aside>
@@ -3390,7 +3398,7 @@ details.method ul{margin:12px 0 0;padding-left:18px;display:flex;flex-direction:
           <li>La simulation officielle de votre compte retraite (info-retraite.fr) fait foi.</li>
         </ul>
       </details>
-      <p class="legal">Simulation à caractère indicatif, établie à partir des informations que vous avez communiquées et de la réglementation en vigueur en 2026. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. eToro Patrimoine SAS, courtier en assurance.</p>
+      <p class="legal">Simulation à caractère indicatif, établie à partir des informations que vous avez communiquées et de la réglementation en vigueur en 2026. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. etoro Patrimoine SAS, courtier en assurance.</p>
     </section>
 
     <!-- 6 -->
@@ -3400,14 +3408,15 @@ details.method ul{margin:12px 0 0;padding-left:18px;display:flex;flex-direction:
       <div class="grid-2 needs-releve">
         <div class="card send">
           <h3>Télécharger ma synthèse.</h3>
-          <p class="small muted">Courrier PDF de deux à trois pages. Il porte les coordonnées d'eToro Patrimoine pour reprendre contact à tout moment.</p>
+          <p class="small muted">Courrier PDF de deux à trois pages. Il porte les coordonnées d'etoro Patrimoine pour reprendre contact à tout moment.</p>
           <div class="send-actions"><button class="btn" type="button" id="btn-pdf">Télécharger mes résultats</button></div>
           <p class="send-status small" id="st-pdf" role="status"></p>
         </div>
         <div class="card send">
           <h3>Prendre rendez-vous avec un conseiller.</h3>
-          <p class="small muted">Choisissez un créneau dans l'agenda des conseillers eToro Patrimoine. Apportez votre synthèse : le conseiller valide le diagnostic avec vous.</p>
-          <div class="send-actions"><a class="btn" href="https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine" target="_blank" rel="noopener">Prendre rendez-vous</a></div>
+          <p class="small muted">Choisissez un créneau dans l'agenda des conseillers etoro Patrimoine. Apportez votre synthèse : le conseiller valide le diagnostic avec vous.</p>
+          <div class="send-actions"><a class="btn" href="https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine" target="_blank" rel="noopener">Prendre rendez-vous</a>
+<a class="btn" href="https://www.etoro.com/home?action=wealthfrance_trigger_flow" target="_blank" rel="noopener" data-epargne>Découvrir l’épargne etoro</a></div>
           <dl class="contact-list">
             <dt>Téléphone</dt><dd class="num">01 89 70 56 40</dd>
             <dt>E-mail</dt><dd>contact@etoropatrimoine.fr</dd>
@@ -3447,7 +3456,7 @@ const EMPTY_K={prenom:"",nom:"",civ:"",naissance:"",situation:"celib",enfants:0,
 const DEMO={k:{prenom:"",nom:"",civ:"",naissance:"1970-06-22",situation:"marie",enfants:2,conjoint:55000,profil:"equilibre",perEncours:18400,perMensuel:250,avEncours:64000,email:"",id:""},
   p:{fixe:76000,variable:10000,enfTrim:"8",cibleMode:"70",rb:4,init:20000}};
 const CONTACT={tel:"01 89 70 56 40",email:"contact@etoropatrimoine.fr",adresse:"19 boulevard Malesherbes, 75008 Paris",rdv:"https://calendly.com/d/crzd-vrc-thq/contact-etoro-patrimoine",rdvCourt:"calendly.com/d/crzd-vrc-thq",site:"etoropatrimoine.fr",orias:"11064583"};
-const CONSEILLER={nom:"eToro Patrimoine",email:CONTACT.email};
+const CONSEILLER={nom:"etoro Patrimoine",email:CONTACT.email};
 let demo=false;
 const state={k:{},r:{},p:{}};
 function hasBirth(){const y=+String(state.k.naissance||"").slice(0,4);return y>=1940&&y<=2010&&!isNaN(new Date(state.k.naissance+"T00:00:00"));}
@@ -3857,7 +3866,7 @@ function letterHtml(R){
   const h2='style="'+f+'font-size:15px;font-weight:800;color:#075434;margin:26px 0 8px;letter-spacing:-.01em"';
   const p='style="'+f+'font-size:14px;line-height:1.55;color:#10110E;margin:0 0 6px"';
   let s='<div style="'+f+'background:#FFFFFF;color:#10110E;padding:32px 36px;max-width:680px">';
-  s+='<table role="presentation" width="100%" style="border-collapse:collapse"><tr><td style="background:#10110E;padding:14px 18px;border-radius:6px"><span style="'+f+'font-size:16px;font-weight:800;color:#ECEAD1">eToro Patrimoine</span><span style="'+f+'font-size:13px;color:#D9D7C1;margin-left:10px">Diagnostic retraite</span></td></tr></table>';
+  s+='<table role="presentation" width="100%" style="border-collapse:collapse"><tr><td style="background:#10110E;padding:14px 18px;border-radius:6px"><span style="'+f+'font-size:16px;font-weight:800;color:#ECEAD1">etoro Patrimoine</span><span style="'+f+'font-size:13px;color:#D9D7C1;margin-left:10px">Diagnostic retraite</span></td></tr></table>';
   s+='<p style="'+f+'font-size:13px;color:#585B4F;margin:18px 0 0;text-align:right">Le '+esc(L.dstr)+'</p>';
   if(L.nom)s+='<p '+p+'><b>'+esc(L.nom)+'</b></p>';
   s+='<p style="'+f+'font-size:14px;font-weight:700;margin:22px 0 14px">Objet : votre diagnostic retraite.</p>';
@@ -3875,20 +3884,20 @@ function letterHtml(R){
   s+='<table role="presentation" width="100%" style="border-collapse:collapse;margin-top:24px"><tr><td style="background:#10110E;border-radius:6px;padding:16px 18px;'+f+'color:#ECEAD1">'
     +'<div style="font-size:15px;font-weight:800;margin-bottom:8px">Parler de ce diagnostic avec un conseiller.</div>'
     +'<div style="font-size:14px;line-height:1.7">Téléphone : <b style="color:#6DFF8A">'+esc(CONTACT.tel)+'</b><br>E-mail : <b style="color:#6DFF8A">'+esc(CONTACT.email)+'</b><br>Rendez-vous en ligne : <a href="'+esc(CONTACT.rdv)+'" style="color:#6DFF8A;font-weight:700">'+esc(CONTACT.rdvCourt)+'</a><br><span style="color:#D9D7C1">'+esc(CONTACT.adresse)+'</span></div></td></tr></table>';
-  s+='<p '+p+' style="margin-top:18px">L\'équipe eToro Patrimoine</p>';
-  s+='<p style="'+f+'font-size:11px;color:#585B4F;margin:24px 0 0;border-top:1px solid #E6E3CC;padding-top:10px">Simulation à caractère indicatif, établie à partir des informations communiquées et de la réglementation en vigueur en 2026. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. eToro Patrimoine SAS, courtier en assurance, ORIAS '+CONTACT.orias+', '+esc(CONTACT.adresse)+'.</p>';
+  s+='<p '+p+' style="margin-top:18px">L\'équipe etoro Patrimoine</p>';
+  s+='<p style="'+f+'font-size:11px;color:#585B4F;margin:24px 0 0;border-top:1px solid #E6E3CC;padding-top:10px">Simulation à caractère indicatif, établie à partir des informations communiquées et de la réglementation en vigueur en 2026. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. etoro Patrimoine SAS, courtier en assurance, ORIAS '+CONTACT.orias+', '+esc(CONTACT.adresse)+'.</p>';
   return s+'</div>';
 }
 function letterText(R){
   const L=letterParts(R), out=[];
-  out.push("eToro Patrimoine · Diagnostic retraite","Le "+L.dstr,"",L.nom,"","Objet : votre diagnostic retraite.","",L.salut+",","Vous trouverez ci-dessous la synthèse du diagnostic établi à partir de votre relevé de carrière, des informations de votre dossier et de vos réponses.");
+  out.push("etoro Patrimoine · Diagnostic retraite","Le "+L.dstr,"",L.nom,"","Objet : votre diagnostic retraite.","",L.salut+",","Vous trouverez ci-dessous la synthèse du diagnostic établi à partir de votre relevé de carrière, des informations de votre dossier et de vos réponses.");
   out.push("","VOTRE SITUATION",...L.situation);
   out.push("","VOTRE RETRAITE ESTIMÉE",...L.pension.map(([a,v])=>a+" : "+(v<0?"−":"")+eur(Math.abs(v))),"Soit "+pct(L.rr)+" de votre revenu actuel après impôt.");
   out.push("","VOTRE OBJECTIF",...L.objectif);
   out.push("","CE QU'IL FAUT FAIRE",...L.plan.map((x,i)=>(i+1)+". "+x.t+" : "+x.a+". "+x.d));
   out.push("","POINTS À VÉRIFIER",...L.flags.map(x=>x.t+". "+x.d));
   out.push("","HYPOTHÈSES",...L.hyp);
-  out.push("","Un conseiller eToro Patrimoine peut valider ce diagnostic avec vous et établir une recommandation personnalisée.","","L'équipe eToro Patrimoine",CONSEILLER.email,"","Simulation à caractère indicatif. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. eToro Patrimoine SAS, courtier en assurance.");
+  out.push("","Un conseiller etoro Patrimoine peut valider ce diagnostic avec vous et établir une recommandation personnalisée.","","L'équipe etoro Patrimoine",CONSEILLER.email,"","Simulation à caractère indicatif. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. etoro Patrimoine SAS, courtier en assurance.");
   return out.join("\n");
 }
 function renderEnvoi(R){
@@ -3919,7 +3928,7 @@ async function buildPdf(R){
   const font=(st,sz)=>{doc.setFont("helvetica",st);doc.setFontSize(sz);};
   function header(first){
     doc.setFillColor(...C.dark);doc.rect(0,0,W,first?30:16,"F");
-    font("bold",first?15:11);col(C.cream);doc.text("eToro Patrimoine",M,first?13:10);
+    font("bold",first?15:11);col(C.cream);doc.text("etoro Patrimoine",M,first?13:10);
     font("normal",first?10:8.5);col([217,215,193]);doc.text(pdfTxt("Diagnostic retraite · "+L.dstr),first?M:W-M,first?20:10,first?undefined:{align:"right"});
     if(first){font("bold",10);col(C.signal);doc.text(pdfTxt("Tél. "+CONTACT.tel),W-M,13,{align:"right"});doc.text(pdfTxt(CONTACT.email),W-M,19,{align:"right"});}
     y=first?40:26;
@@ -3929,7 +3938,7 @@ async function buildPdf(R){
     for(let i=1;i<=n;i++){doc.setPage(i);
       doc.setDrawColor(...C.line);doc.setLineWidth(.3);doc.line(M,280,W-M,280);
       font("bold",8.5);col(C.green);doc.text(pdfTxt("Contact : "+CONTACT.tel+"  ·  "+CONTACT.email+"  ·  Rendez-vous : "+CONTACT.rdvCourt),M,285);
-      font("normal",7.5);col(C.muted);doc.text(pdfTxt("eToro Patrimoine SAS · ORIAS "+CONTACT.orias+" · "+CONTACT.adresse),M,289.5);
+      font("normal",7.5);col(C.muted);doc.text(pdfTxt("etoro Patrimoine SAS · ORIAS "+CONTACT.orias+" · "+CONTACT.adresse),M,289.5);
       doc.text(i+" / "+n,W-M,289.5,{align:"right"});}
   }
   function need(h){if(y+h>BOTTOM){doc.addPage();header(false);}}
@@ -3970,7 +3979,7 @@ async function buildPdf(R){
   doc.textWithLink(pdfTxt(CONTACT.rdvCourt),M+36,y+30,{url:CONTACT.rdv});
   font("normal",8.5);col([217,215,193]);doc.text(pdfTxt(CONTACT.adresse),W-M-6,y+33,{align:"right"});
   y+=44;
-  para("Simulation à caractère indicatif, établie à partir des informations communiquées et de la réglementation en vigueur en 2026. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. La simulation officielle de votre compte retraite (info-retraite.fr) fait foi. eToro Patrimoine SAS, courtier en assurance, ORIAS "+CONTACT.orias+".",{size:8,color:C.muted});
+  para("Simulation à caractère indicatif, établie à partir des informations communiquées et de la réglementation en vigueur en 2026. Elle ne constitue ni un conseil en investissement ni une recommandation personnalisée. La simulation officielle de votre compte retraite (info-retraite.fr) fait foi. etoro Patrimoine SAS, courtier en assurance, ORIAS "+CONTACT.orias+".",{size:8,color:C.muted});
   footer();
   return doc.output("blob");
 }
@@ -4059,9 +4068,9 @@ fillKyc();fillReleve([]);fillParams();statusDefault();resetEnvoi();render();
   show('hub',false); route(false);
 })();
 
-/* Connexion eToro (OAuth 2.0 + PKCE S256).
+/* Connexion etoro (OAuth 2.0 + PKCE S256).
    La page ne détient aucun secret : l'échange du code se fait sur le serveur ETP_AUTH.serveur,
-   qui ne renvoie que le jeton d'identité. Le bouton n'apparaît qu'à l'adresse enregistrée chez eToro. */
+   qui ne renvoie que le jeton d'identité. Le bouton n'apparaît qu'à l'adresse enregistrée chez etoro. */
 (function(){
   var ETP_AUTH={
     clientId:'06e02c94-1d00-4994-8715-07baec436e6d',
@@ -4086,7 +4095,7 @@ fillKyc();fillReleve([]);fillParams();statusDefault();resetEnvoi();render();
     window.etpAuth={connected:!!u,user:u};
     box.hidden=false;
     if(u){who.hidden=false;who.textContent=u.name?('Connecté : '+u.name):'Connecté';btn.textContent='Se déconnecter';btn.className='out';}
-    else{who.hidden=true;who.textContent='';btn.textContent='Se connecter avec eToro';btn.className='';}
+    else{who.hidden=true;who.textContent='';btn.textContent='Se connecter avec etoro';btn.className='';}
   }
   function login(){
     if(!(window.crypto&&crypto.subtle)){window.etpNotice('Connexion indisponible dans ce navigateur.');return;}
@@ -4105,7 +4114,7 @@ fillKyc();fillReleve([]);fillParams();statusDefault();resetEnvoi();render();
     var saved=null; try{saved=JSON.parse(store.get('etp_pkce')||'null');}catch(e){}
     store.del('etp_pkce');
     try{history.replaceState(null,'',ETP_AUTH.retour);}catch(e){}
-    if(err){window.etpNotice('Connexion eToro refusée ou annulée ('+err+').');return;}
+    if(err){window.etpNotice('Connexion etoro refusée ou annulée ('+err+').');return;}
     if(!saved || q.get('state')!==saved.s){window.etpNotice('Connexion interrompue : la demande ne correspond pas à cette session. Recommencez.');return;}
     btn.disabled=true;btn.textContent='Connexion en cours';
     fetch(ETP_AUTH.serveur+'/token',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:code,code_verifier:saved.v})})
@@ -4117,9 +4126,9 @@ fillKyc();fillReleve([]);fillParams();statusDefault();resetEnvoi();render();
         if(!c || !c.sub || c.iss!=='https://www.etoro.com' || !audOk || c.nonce!==saved.n || !(c.exp*1000>Date.now())) throw new Error('jeton invalide');
         var name=c.name||[c.given_name,c.family_name].filter(Boolean).join(' ')||c.preferred_username||c.username||'';
         store.set('etp_user',JSON.stringify({sub:c.sub,name:name,exp:c.exp}));
-        window.etpNotice('Connexion eToro établie.');
+        window.etpNotice('Connexion etoro établie.');
       })
-      .catch(function(e){window.etpNotice('La connexion eToro a échoué ('+(e&&e.message||'erreur')+').');})
+      .catch(function(e){window.etpNotice('La connexion etoro a échoué ('+(e&&e.message||'erreur')+').');})
       .then(function(){btn.disabled=false;paint();});
   }
   btn.addEventListener('click',function(){ if(window.etpAuth.connected){store.del('etp_user');paint();} else login(); });
